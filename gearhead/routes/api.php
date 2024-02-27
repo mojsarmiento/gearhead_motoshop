@@ -1,9 +1,14 @@
+Kobe Roca
 <?php
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\ApiMotorController;
+use App\Http\Controllers\ApiAccessoriesController;
+use App\Http\Controllers\ApiCartController;
+use App\Http\Controllers\ApiOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +36,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
 });
 
-
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    //return $request->user();
-//});
+// For Api Motors-Accessories-Cart-Orders
+Route::resource('motor', ApiMotorController::class);
+Route::resource('accessories', ApiAccessoriesController::class);
+Route::resource('cart', ApiCartController::class);
+Route::resource('orders', ApiOrderController::class);
