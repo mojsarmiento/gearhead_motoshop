@@ -64,10 +64,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        // Check if the seller registration flag is present
+        if (isset($data['register_as_seller']) && $data['register_as_seller'] == 1) {
+            // Call the registerAsSeller method
+            app(SellerRegistrationController::class)->registerAsSeller(request());
+        }
+
+        return $user;
     }
+
 }

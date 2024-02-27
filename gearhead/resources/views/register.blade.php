@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <title>Signup</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
         @media (max-width: 600px) {
             body {
                 overflow-x: hidden;
                 background: #eff0f3;
-                font-family: Arial;
             }
 
             nav {
@@ -34,8 +36,6 @@
             body {
                 overflow-x: hidden;
                 background: #eff0f3;
-                font-family: Helvetica;
-                font-weight: bold;
             }
 
             nav {
@@ -43,54 +43,40 @@
             }
         }
 
-        #imageCarousel {
-            text-align: center;
-        }
-
-        .carousel-inner img {
-            width: 100%;
-            max-height: 500px; /* Adjust the max height as needed */
-            margin: auto;
-        }
-
-        .carousel-control-prev, .carousel-control-next {
-            width: 10%;
-            color: #fff;
-            opacity: 0.8;
-        }
-
-        .carousel-control-prev-icon, .carousel-control-next-icon {
-            background-color: #000; /* Adjust the background color as needed */
-            border-radius: 50%;
-        }
-
-        .carousel-control-prev:hover, .carousel-control-next:hover {
-            color: #fff;
-            opacity: 1;
-        }
-
         .navbar-nav a:hover {
             color: red; /* Change the color to your desired hover color */
-            text-decoration: underline; /* You can use other styles like 'bold', 'italic', etc. */
         }
 
         .navbar-nav a{
             color:white;
         }
 
-        .brand-logo-container {
-            height: 210px; /* Set the height as per your design preference */
-            overflow: hidden;
-            border: 2px solid #B2BEB5;
+        .card {
+            border: 1px solid #ccc;
             border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #343a40;
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .card-body {
             padding: 20px;
         }
 
+        .mb-3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-check-label {
+            font-size: 14px;
+        }
     </style>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
         <a class="navbar-brand" href="/" style="margin-left: 20px;">
@@ -100,27 +86,31 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" style="margin-right:20px;">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="justify-content: start;">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="/motor" >MOTORCYCLES</a>
-                <a class="nav-item nav-link" href="/accessories" >ACCESSORIES</a>
-                <a class="nav-item nav-link" href="/community" >COMMUNITY</a>
+                @auth
+                    @if(!auth()->user()->is_seller)
+                        <a class="nav-item nav-link" href="/motor">MOTORCYCLES</a>
+                        <a class="nav-item nav-link" href="/accessories">ACCESSORIES</a>
+                    @endif
+                @endauth
             </div>
         </div>
+
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="justify-content: end; margin-right: 35px;">
             <div class="navbar-nav">
                 @guest
                     <a class="nav-item nav-link" href="{{ route('login') }}">LOGIN</a>
                     <a class="nav-item nav-link" href="{{ route('register') }}">SIGN UP</a>
                 @else
-                    <form action="{{ route('logout') }}" method="post">
-                        @csrf
-                        <button type="submit" class="nav-item nav-link" style="background: none; border: none; cursor: pointer;">LOGOUT</button>
-                    </form>
+                    {{-- Removed the seller-related links --}}
+                    <a class="nav-item nav-link" href="{{ route('profile.show') }}">PROFILE</a>
                 @endguest
             </div>
         </div>
     </nav>
+
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -168,4 +158,5 @@
         </div>
     </div>
 </body>
+
 </html>

@@ -108,4 +108,6 @@ return [
 
     'password_timeout' => 10800,
 
+    'home' => env('HOME', '/home'),
+
 ];

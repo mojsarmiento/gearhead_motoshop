@@ -6,14 +6,20 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "encore/laravel-admin": "^1.8",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "laravel/ui": "^4.3"
+        "laravel/ui": "^4.3",
+        "open-admin-org/open-admin": "^1.0",
+        "stripe/stripe-php": "^13.10",
+        "tcg/voyager": "dev-1.6-l10"
     },
     "require-dev": {
+        "backpack/generators": "^3.3",
         "fakerphp/faker": "^1.9.1",
+        "laracasts/generators": "^2.0",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
@@ -25,7 +31,8 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "App\\Models\\": "app/Models/"
         }
     },
     "autoload-dev": {

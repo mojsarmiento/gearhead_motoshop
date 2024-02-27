@@ -7,11 +7,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <title>Home</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
         @media (max-width: 600px) {
             body {
                 overflow-x: hidden;
                 background: #eff0f3;
-                font-family: Arial;
             }
 
             nav {
@@ -34,8 +34,6 @@
             body {
                 overflow-x: hidden;
                 background: #eff0f3;
-                font-family: Helvetica;
-                font-weight: bold;
             }
 
             nav {
@@ -71,7 +69,6 @@
 
         .navbar-nav a:hover {
             color: red; /* Change the color to your desired hover color */
-            text-decoration: underline; /* You can use other styles like 'bold', 'italic', etc. */
         }
 
         .navbar-nav a{
@@ -89,6 +86,28 @@
             padding: 20px;
         }
 
+        #footer {
+        margin-top: 160px;
+        background-color: #333;
+        color: #fff;
+        padding: 20px 0;
+        }
+
+        .footer {
+            display: block;
+            text-align: center;
+        }
+
+        .brand h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        p {
+            font-size: 14px;
+            margin: 0;
+        }
+
     </style>
 </head>
 <body>
@@ -100,23 +119,27 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" style="margin-right:20px;">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="justify-content: start;">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="/motor" >MOTORCYCLES</a>
-                <a class="nav-item nav-link" href="/accessories" >ACCESSORIES</a>
-                <a class="nav-item nav-link" href="/community" >COMMUNITY</a>
+                @auth
+                    @if(!auth()->user()->is_seller)
+                        <a class="nav-item nav-link" href="/motor">MOTORCYCLES</a>
+                        <a class="nav-item nav-link" href="/accessories">ACCESSORIES</a>
+                    @endif
+                @endauth
             </div>
         </div>
+
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="justify-content: end; margin-right: 35px;">
             <div class="navbar-nav">
                 @guest
                     <a class="nav-item nav-link" href="{{ route('login') }}">LOGIN</a>
                     <a class="nav-item nav-link" href="{{ route('register') }}">SIGN UP</a>
                 @else
-                    <form action="{{ route('logout') }}" method="post">
-                        @csrf
-                        <button type="submit" class="nav-item nav-link" style="background: none; border: none; cursor: pointer;">LOGOUT</button>
-                    </form>
+                    {{-- Removed the seller-related links --}}
+                    <a class="nav-item nav-link" href="{{ route('cart') }}">CART</a>
+                    <a class="nav-item nav-link" href="{{ route('profile.show') }}">PROFILE</a>
                 @endguest
             </div>
         </div>
@@ -153,36 +176,45 @@
     <div class="container-fluid mt-4">
         <div class="row">
             <div class="col-md-2">
-                <div class="brand-logo-container">
+                <a href="{{ Auth::check() ? '/motor' : route('login') }}" class="brand-logo-container">
                     <img class="d-block w-80 h-100 object-fit-cover img-fluid" src="{{ asset('images/suzuki-logo.png') }}" alt="Suzuki Logo">
-                </div>
+                </a>
             </div>
             <div class="col-md-2">
-                <div class="brand-logo-container">
+                <a href="{{ Auth::check() ? '/motor' : route('login') }}" class="brand-logo-container">
                     <img class="d-block w-80 h-100 object-fit-cover img-fluid" src="{{ asset('images/honda_logo.png') }}" alt="Honda Logo">
-                </div>
+                </a>
             </div>
             <div class="col-md-2">
-                <div class="brand-logo-container">
+                <a href="{{ Auth::check() ? '/motor' : route('login') }}" class="brand-logo-container">
                     <img class="d-block w-80 h-100 object-fit-cover img-fluid" src="{{ asset('images/kawasaki_logo.png') }}" alt="Kawasaki Logo">
-                </div>
+                </a>
             </div>
             <div class="col-md-2">
-                <div class="brand-logo-container">
+                <a href="{{ Auth::check() ? '/motor' : route('login') }}" class="brand-logo-container">
                     <img class="d-block w-80 h-100 object-fit-cover v" src="{{ asset('images/yamaha_logo.png') }}" alt="Yamaha Logo">
-                </div>
+                </a>
             </div>
             <div class="col-md-2">
-                <div class="brand-logo-container">
+                <a href="{{ Auth::check() ? '/motor' : route('login') }}" class="brand-logo-container">
                     <img class="d-block w-80 h-100 object-fit-cover img-fluid" src="{{ asset('images/bmw_logo.png') }}" alt="Bmw Logo">
-                </div>
+                </a>
             </div>
             <div class="col-md-2">
-                <div class="brand-logo-container">
+                <a href="{{ Auth::check() ? '/motor' : route('login') }}" class="brand-logo-container">
                     <img class="d-block w-80 h-100 object-fit-cover img-fluid" src="{{ asset('images/skygo_logo.png') }}" alt="Skygo Logo">
-                </div>
+                </a>
             </div>
         </div>
     </div>
+
+    <section id="footer">
+        <div class="footer container">
+            <div class="brand">
+                <h1>GearHead MotoShop</h1>
+            </div>
+            <p>Copyright © 2024 GearHead MotoShop. All rights reserved</p>
+        </div>
+    </section>
 </body>
 </html>
